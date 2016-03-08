@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>Crisis Vis</title>
+
+	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+ 	<script src="http://d3js.org/topojson.v1.min.js"></script>
+ 	<script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
+</head>
+<body>
+
+  	<header>
+	  	<nav>
+	  		<h1>Syrian Crisis Visualization</h1>
+	  		<ul>
+	  			<li><a href="index.html" style="background-color:#000;">Social Media Coverage</a></li>
+	  		</ul>
+	  	</nav>
+	</header>
+
+	<div id="worldMap" style="position: relative; width: 100%; max-height: 800px;"></div>
+
+     <script>
+       //MAP  - Specify bubbles, arcs & config in here
+      var map = new Datamap({
+        scope: 'world',
+        element: document.getElementById('worldMap'),
+        projection: 'mercator',
+        height: 500,
+        fills: {
+          defaultFill: '#FFF',
+        },
+        geographyConfig: {
+        	borderColor: '#000',
+        	highlightFillColor: '#333',
+        	highlightBorderColor: '#666'
+        }
+      });
+     </script>
+</body>
