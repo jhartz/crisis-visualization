@@ -20,7 +20,7 @@ var map = new Datamap({
 function addBubbles(bubbles){
   map.bubbles(bubbles, {
     popupTemplate: function(geo, data){
-      return '<div class="hoverinfo">'+data.name+''
+      return '<div class="hoverinfo">'+data.name.replace(/\n/g, "<br>")
     }
   });
 }

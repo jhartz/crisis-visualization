@@ -14,8 +14,8 @@ var minMembers = Infinity,
  * @param {Object} jsonData - The JSON data representing this location.
  */
 function Location(jsonData) {
-    this.name = jsonData.name || "unnamed";
-    this.enName = jsonData.en_name || "unnamed";
+    this.name = jsonData.name || "";
+    this.enName = jsonData.en_name || "";
     this.date = new Date(jsonData.date);
 
     this.members = jsonData.members || DEFAULT_MEMBERS;
@@ -63,11 +63,10 @@ Location.prototype.getScaledRadius = function () {
  */
 Location.prototype.getD3Object = function () {
     var data = {
-        name: this.name,
+        name: this.getDescription(),
         radius: this.getScaledRadius(),
         fillKey: this.media,
-        date: this.date,
-        significance: this.getDescription()
+        date: this.date
     };
     if (this.location) {
         data.latitude = this.location.lat;
