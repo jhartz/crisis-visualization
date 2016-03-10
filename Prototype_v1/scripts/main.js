@@ -24,3 +24,9 @@ function addBubbles(bubbles){
     }
   });
 }
+
+
+// Read the local data in ../social.json
+window.addEventListener("load", function (event) {
+    readJSON("../social.json");
+}, false);

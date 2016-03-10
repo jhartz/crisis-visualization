@@ -73,6 +73,7 @@ Location.prototype.getD3Object = function () {
         data.latitude = this.location.lat;
         data.longitude = this.location.lng;
     } else {
+        console.log("WARNING: Using country:", this.country);
         data.country = this.country;
     }
     return data;
