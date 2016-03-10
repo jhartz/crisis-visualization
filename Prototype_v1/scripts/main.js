@@ -6,8 +6,9 @@ var map = new Datamap({
   height: 500,
   fills: {
     defaultFill: '#FFF',
-    Facebook: '#00F',
-    Twitter: '#0AF'
+    facebook: '#00F',
+    twitter: '#0F0',
+    website: '#F00'
   },
   geographyConfig: {
       borderColor: '#000',
