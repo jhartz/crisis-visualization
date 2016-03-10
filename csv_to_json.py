@@ -8,7 +8,7 @@ import sys
 import requests
 
 # geonames username
-GEO_USERNAME = 'demo'
+GEO_USERNAME = 'cryovis'
 GEO_URL = 'http://api.geonames.org/postalCodeLookupJSON'
 GEO_CACHE_FILE = 'geo_cache.json'
 GEO_CACHE = {}
@@ -38,7 +38,7 @@ class SocialToJson:
             langs = row[5]
             # Country it's based in
             country = row[6]
-            # What countries does it serve
+            # Specific location
             location = row[7]
             # What media type does this org use? Facebook, Website, Twitter?
             media = (row[8] or "unknown").lower()
@@ -67,8 +67,12 @@ class SocialToJson:
                 media = 'website'
             # Otherwise leave it alone
 
-            # Get the lat and lng of the location
-            lat_lng = self.get_latlng(country)
+            # First try a more specific location
+            lat_lng = self.get_latlng(location)
+            # If that fails fall back to the country
+            if lat_lng is None:
+                lat_lng = self.get_latlng(country)
+            # If that fails then oh well
 
             data = {
                 'date': str(date),
@@ -77,7 +81,6 @@ class SocialToJson:
                 'description': description,
                 'lang': lang_list,
                 'country': country,
-                'coverage': location,
                 'media': media,
                 'url': link,
                 'members': members,
@@ -88,23 +91,30 @@ class SocialToJson:
 
         # Store current geo_cache back to file
         with open(GEO_CACHE_FILE,'w') as fido:
-            fido.write(json.dumps(self.geo_cache))
+            fido.write(json.dumps(self.geo_cache, indent=2, sort_keys=True))
         return yeah
 
 
     def get_latlng(self,placename):
         # First check the cache
-        coords = self.geo_cache.get(placename)
-        if coords is not None:
-            return coords
+        if placename in self.geo_cache:
+            coords = self.geo_cache[placename]
+            if coords is None:
+                return None
+            else:
+                return coords['location']
+        # If it wasn't in the cache then get from the server
         params = {'placename': placename, 'maxRows': 1, 'username': GEO_USERNAME}
         r = requests.get(GEO_URL, params=params)
-        postalData = json.loads(r.text)
+        postalData = json.loads(r.text) 
         dataList = postalData.get('postalcodes') or []
         if len(dataList) > 0:
+            # Add the data to the geo cache
             postal = dataList[0]
-            coords = {'lat': postal.get('lat'), 'lng': postal.get('lng')}
-            self.geo_cache[placename] = coords
+            coords = {'lat': postal['lat'], 'lng': postal['lng']}
+            geo_data = {'name': postal['placeName'], 'location': coords}
+            self.geo_cache[placename] = geo_data
+            # Now give them back their results
             return coords
         else:
             return None

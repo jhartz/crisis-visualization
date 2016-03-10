@@ -1,1 +1,351 @@
-{"Greece": {"lat": 44.033802, "lng": -83.702024}, "Austria ": {"lat": 47.92796078773113, "lng": 16.216506958007812}, "Serbia": {"lat": 49.9371656797901, "lng": 14.1359178115843}, "Croatia": {"lat": 45.2316667, "lng": 16.5391667}, "Australia": {"lat": -33.869053514373135, "lng": 151.20709419250505}, "Norway": {"lat": 44.212654, "lng": -70.560135}, "France": {"lat": 34.625157, "lng": -82.765393}, "Turkey": {"lat": 34.985673, "lng": -78.212086}, "Macedonia": {"lat": 41.322236, "lng": -81.499578}, "Greece ": {"lat": 44.033802, "lng": -83.702024}, "USA": {"lat": 35.399157, "lng": 136.731964}, "Balkan": {"lat": 41.75, "lng": 24.85}, "Slovenia": {"lat": 46.133333, "lng": 14.566667}, "Slovenia ": {"lat": 46.133333, "lng": 14.566667}, "Netherlands": {"lat": 52.468333, "lng": 5.045833}, "Denmark": {"lat": 26.047557, "lng": -80.144728}, "Russia": {"lat": 60.60553595347556, "lng": 22.290081278256686}, "United Kingdom": {"lat": 38.95508, "lng": -91.952008}, "Luxembourg": {"lat": 49.6116667, "lng": 6.13}, "Bulgaria": {"lat": 44.112694022787906, "lng": 12.32594673175133}, "Hungary": {"lat": 47.46181265222575, "lng": 18.958454132080078}, "Germany": {"lat": 52.5161166666667, "lng": 13.38735}, "Finland": {"lat": 60.88375441155675, "lng": 21.096930661681988}, "Switzerland": {"lat": 50.9968, "lng": 13.6499333333333}, "Iceland": {"lat": 28.276389, "lng": -80.656825}, "United States": {"lat": 33.680451, "lng": -95.490539}, "Holland": {"lat": 52.468333, "lng": 5.045833}, "N/A": {"lat": 47.88722619647, "lng": 14.2581939697266}, "Sweden": {"lat": 38.465777, "lng": -81.050662}, "Spain": {"lat": 48.744411, "lng": 5.030222}, "Ireland": {"lat": 38.7762701226789, "lng": -80.45668594894016}}
+{
+  "Akershus": {
+    "location": {
+      "lat": 59.9099432158702,
+      "lng": 10.6354522705078
+    },
+    "name": "Lysaker"
+  },
+  "Amsterdam": {
+    "location": {
+      "lat": 40.473131,
+      "lng": -80.959554
+    },
+    "name": "Amsterdam"
+  },
+  "Athens ": {
+    "location": {
+      "lat": 33.976097,
+      "lng": -83.363174
+    },
+    "name": "Athens"
+  },
+  "Aust-Agder": {
+    "location": {
+      "lat": 58.33091,
+      "lng": 8.23229
+    },
+    "name": "Birkeland"
+  },
+  "Australia": {
+    "location": {
+      "lat": -33.869053514373135,
+      "lng": 151.20709419250505
+    },
+    "name": "Australia Square"
+  },
+  "Austria ": {
+    "location": {
+      "lat": 47.92796078773113,
+      "lng": 16.216506958007812
+    }
+  },
+  "Balkan": {
+    "location": {
+      "lat": 41.75,
+      "lng": 24.85
+    },
+    "name": "Balkan makhala"
+  },
+  "Bapska": {
+    "location": {
+      "lat": 45.1975,
+      "lng": 19.26
+    },
+    "name": "Bapska"
+  },
+  "Belgrade": {
+    "location": {
+      "lat": 44.46875,
+      "lng": -69.860636
+    },
+    "name": "Belgrade"
+  },
+  "Bergen": {
+    "location": {
+      "lat": 52.660833,
+      "lng": 4.630556
+    },
+    "name": "Bergen aan Zee"
+  },
+  "Berlin": {
+    "location": {
+      "lat": 52.532,
+      "lng": 13.3922
+    },
+    "name": "Berlin"
+  },
+  "Budapest": {
+    "location": {
+      "lat": 47.4980099893041,
+      "lng": 19.0399074554443
+    },
+    "name": "Budapest"
+  },
+  "Buskerud": {
+    "location": {
+      "lat": 59.750747,
+      "lng": 10.024767
+    },
+    "name": "Mj\u00f8ndalen"
+  },
+  "Calais": {
+    "location": {
+      "lat": 45.171478,
+      "lng": -67.26408
+    },
+    "name": "Calais"
+  },
+  "Celje": {
+    "location": {
+      "lat": 45.59161,
+      "lng": 14.15464
+    },
+    "name": "Celje - dostava"
+  },
+  "Copenhagen": {
+    "location": {
+      "lat": 43.880136,
+      "lng": -75.683913
+    },
+    "name": "Copenhagen"
+  },
+  "Croatia": {
+    "location": {
+      "lat": 45.2316667,
+      "lng": 16.5391667
+    }
+  },
+  "Denmark": {
+    "location": {
+      "lat": 26.047557,
+      "lng": -80.144728
+    },
+    "name": "Dania"
+  },
+  "Dimitrovgrad": {
+    "location": {
+      "lat": 54.2358375,
+      "lng": 49.4291091
+    },
+    "name": "Dimitrovgrad"
+  },
+  "Dundalk": {
+    "location": {
+      "lat": 39.265493140633666,
+      "lng": -76.49345233702142
+    },
+    "name": "Dundalk"
+  },
+  "Dunkerque": {
+    "location": {
+      "lat": 51.032974312671534,
+      "lng": 2.376995086669922
+    },
+    "name": "Dunkerque"
+  },
+  "Dunkirk": {
+    "location": {
+      "lat": 42.487716,
+      "lng": -79.328287
+    },
+    "name": "Dunkirk"
+  },
+  "Essex": {
+    "location": {
+      "lat": 42.628629,
+      "lng": -70.782794
+    },
+    "name": "Essex"
+  },
+  "Exeter": {
+    "location": {
+      "lat": 42.951274,
+      "lng": -70.922262
+    },
+    "name": "Exeter"
+  },
+  "Finland": {
+    "location": {
+      "lat": 60.1640504,
+      "lng": 24.7600971
+    },
+    "name": "Helsinki"
+  },
+  "Finnmark": {
+    "location": {
+      "lat": 70.588769,
+      "lng": 22.287119
+    },
+    "name": "Breivikbotn"
+  },
+  "France": {
+    "location": {
+      "lat": 34.625157,
+      "lng": -82.765393
+    },
+    "name": "La France"
+  },
+  "Frankfurt": {
+    "location": {
+      "lat": 52.3475,
+      "lng": 14.5539
+    },
+    "name": "Frankfurt (Oder)"
+  },
+  "Geneva": {
+    "location": {
+      "lat": 28.750299,
+      "lng": -81.11137
+    },
+    "name": "Geneva"
+  },
+  "Germany": {
+    "location": {
+      "lat": 52.5161166666667,
+      "lng": 13.38735
+    },
+    "name": "Berlin"
+  },
+  "Greece": {
+    "location": {
+      "lat": 44.033802,
+      "lng": -83.702024
+    }
+  },
+  "Hamburg": {
+    "location": {
+      "lat": 53.5521285714286,
+      "lng": 10.0004285714286
+    },
+    "name": "Hamburg"
+  },
+  "Holland": {
+    "location": {
+      "lat": 52.468333,
+      "lng": 5.045833
+    },
+    "name": "Katwoude"
+  },
+  "Idomeni": {
+    "location": {
+      "lat": 41.1176389,
+      "lng": 22.87555555
+    },
+    "name": "Idomeni"
+  },
+  "Ireland": {
+    "location": {
+      "lat": 38.7762701226789,
+      "lng": -80.45668594894016
+    },
+    "name": "Ireland"
+  },
+  "Jersey": {
+    "location": {
+      "lat": 40.722126,
+      "lng": -74.046878
+    },
+    "name": "Jersey City"
+  },
+  "Kalymnos": {
+    "location": {
+      "lat": 36.95,
+      "lng": 26.9833333
+    },
+    "name": "Kalymnos"
+  },
+  "Kavala": {
+    "location": {
+      "lat": 40.939586,
+      "lng": 24.406868
+    },
+    "name": "Kavala"
+  },
+  "Leros": {
+    "location": {
+      "lat": 38.357183000000006,
+      "lng": -0.9003825
+    },
+    "name": "Leros, Los"
+  },
+  "Location": null,
+  "Luxembourg": {
+    "location": {
+      "lat": 49.6116667,
+      "lng": 6.13
+    },
+    "name": "Luxembourg"
+  },
+  "N/A": null,
+  "New York": {
+    "location": {
+      "lat": 40.74838,
+      "lng": -73.996705
+    },
+    "name": "New York City"
+  },
+  "Norway": {
+    "location": {
+      "lat": 44.212654,
+      "lng": -70.560135
+    },
+    "name": "Norway"
+  },
+  "Oslo": {
+    "location": {
+      "lat": 59.91273,
+      "lng": 10.74609
+    },
+    "name": "Oslo"
+  },
+  "Skopje": {
+    "location": {
+      "lat": 41.996457,
+      "lng": 21.431407
+    },
+    "name": "Skopje"
+  },
+  "Slovenia": {
+    "location": {
+      "lat": 46.133333,
+      "lng": 14.566667
+    },
+    "name": "Trzin"
+  },
+  "Spain": {
+    "location": {
+      "lat": 48.744411,
+      "lng": 5.030222
+    },
+    "name": "Robert-Espagne"
+  },
+  "St Polten ": {
+    "location": {
+      "lat": 48.2,
+      "lng": 15.6333333
+    },
+    "name": "St. Polten"
+  },
+  "Stuttgart": {
+    "location": {
+      "lat": 48.7667,
+      "lng": 9.18333
+    },
+    "name": "Stuttgart"
+  },
+  "Werne": {
+    "location": {
+      "lat": 51.6658,
+      "lng": 7.64563333333333
+    },
+    "name": "Werne"
+  },
+  "\u00d8stfold": {
+    "location": {
+      "lat": 59.434952333333335,
+      "lng": 10.741237666666668
+    },
+    "name": "V\u00e5ler I \u00d8stfold"
+  }
+}
