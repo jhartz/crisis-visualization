@@ -6,7 +6,8 @@ var map = new Datamap({
   height: 500,
   fills: {
     defaultFill: '#FFF',
-    Facebook: '#00F'
+    Facebook: '#00F',
+    Twitter: '#0AF'
   },
   geographyConfig: {
       borderColor: '#000',
@@ -15,14 +16,10 @@ var map = new Datamap({
   }
 });
 
-map.bubbles([{
-        name: 'Test 1',
-        radius: 50,
-        fillKey: 'Facebook',
-        latitude: 11.415,
-        longitude: 105.1619,
-    }], {
-      popupTemplate: function(geo, data) {
-        return '<div class="hoverinfo">'+data.name+''
-      }
-    });
+function addBubbles(bubbles){
+  map.bubbles(bubbles, {
+    popupTemplate: function(geo, data){
+      return '<div class="hoverinfo">'+data.name+''
+    }
+  });
+}
