@@ -1,6 +1,7 @@
+/** ZEROing **/
+
 body{
 	width: 100%;
-	height: 70000px;
 	margin: 0;
 	padding: 0;
 }
@@ -35,9 +36,7 @@ header nav ul{
 	float: right;
 }
 
-header nav ul li{
-	float: left;
-}
+header nav ul li{ float: left; }
 
 header li a{
 	display: block;
@@ -47,9 +46,7 @@ header li a{
 	text-decoration: none;
 }
 
-header li a:hover{
-	background-color: #111;
-}
+header li a:hover{ background-color: #111; }
 
 /** WORLD MAP **/
 
