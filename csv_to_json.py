@@ -5,16 +5,23 @@ from datetime import date, datetime
 import json
 import sys
 
+# pip install 'requests'
 import requests
+# pip install 'geopy'
+import geopy.geocoders
 
-# geonames username
-GEO_USERNAME = 'cryovis'
+# Get the secrets from the secrets file
+SECRETS = open('secrets.txt', 'r').read().splitlines()
+GEO_USERNAME = SECRETS[0]
+GOOGLE_API_KEY = SECRETS[1]
+
 GEO_URL = 'http://api.geonames.org/postalCodeLookupJSON'
 GEO_CACHE_FILE = 'geo_cache.json'
-GEO_CACHE = {}
-
 
 class SocialToJson:
+    def __init__(self):
+        self.geolocator = geopy.geocoders.GoogleV3(api_key=GOOGLE_API_KEY)
+
     def process_file(self, filename):
         # Load the Geo-coordinate cache from the file
         if os.path.exists(GEO_CACHE_FILE):
@@ -95,14 +102,46 @@ class SocialToJson:
         return yeah
 
 
-    def get_latlng(self,placename):
-        # First check the cache
+    def get_latlng(self, placename, country=None):
+        placename = placename.strip()
+        if placename == '':
+            return None
+        # First check the cache    
         if placename in self.geo_cache:
             coords = self.geo_cache[placename]
             if coords is None:
                 return None
             else:
                 return coords['location']
+        else:
+            try:
+                print('Geo-locating', placename)
+            except UnicodeEncodeError:
+                # safe_text = str(bytearray(placename), encoding='ascii')
+                # print('Geo-locating', safe_text)
+                print('Failed to print placename')
+            try:
+                location = self.geolocator.geocode(placename)
+            except:
+                location = None
+            if location is None:
+                geodata = self.get_geonames(placename)
+            else:
+                geodata = {
+                    'name': location.address,
+                    'location': {
+                        'lat': location.latitude,
+                        'lng': location.longitude
+                    }
+                }
+            if geodata is not None:
+                self.geo_cache[placename] = geodata
+                return geodata['location']
+            else:
+                print('Unable to geolocate', placename)
+                return None
+        
+    def get_geonames(self, placename):
         # If it wasn't in the cache then get from the server
         params = {'placename': placename, 'maxRows': 1, 'username': GEO_USERNAME}
         r = requests.get(GEO_URL, params=params)
@@ -112,10 +151,7 @@ class SocialToJson:
             # Add the data to the geo cache
             postal = dataList[0]
             coords = {'lat': postal['lat'], 'lng': postal['lng']}
-            geo_data = {'name': postal['placeName'], 'location': coords}
-            self.geo_cache[placename] = geo_data
-            # Now give them back their results
-            return coords
+            return {'name': postal['placeName'], 'location': coords}
         else:
             return None
 

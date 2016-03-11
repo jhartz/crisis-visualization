@@ -1,4 +1,11 @@
 {
+  "AKC MEDIKA, Pierottijeva 11 Zagreb, Croatia": {
+    "location": {
+      "lat": 45.8150108,
+      "lng": 15.981919
+    },
+    "name": "Zagreb, Croatia"
+  },
   "Akershus": {
     "location": {
       "lat": 59.9099432158702,
@@ -12,6 +19,13 @@
       "lng": -80.959554
     },
     "name": "Amsterdam"
+  },
+  "Athens": {
+    "location": {
+      "lat": 37.983917,
+      "lng": 23.7293599
+    },
+    "name": "Athens, Greece"
   },
   "Athens ": {
     "location": {
@@ -74,6 +88,13 @@
       "lng": 13.3922
     },
     "name": "Berlin"
+  },
+  "Bristol/Dunkirk": {
+    "location": {
+      "lat": 51.47610030000001,
+      "lng": -2.5374028
+    },
+    "name": "Dunkirk Rd, Bristol, City of Bristol BS16 3DL, UK"
   },
   "Budapest": {
     "location": {
@@ -151,12 +172,26 @@
     },
     "name": "Dunkirk"
   },
+  "EUROPE": {
+    "location": {
+      "lat": 54.5259614,
+      "lng": 15.2551187
+    },
+    "name": "Europe"
+  },
   "Essex": {
     "location": {
       "lat": 42.628629,
       "lng": -70.782794
     },
     "name": "Essex"
+  },
+  "Europe": {
+    "location": {
+      "lat": 54.5259614,
+      "lng": 15.2551187
+    },
+    "name": "Europe"
   },
   "Exeter": {
     "location": {
@@ -207,6 +242,13 @@
     },
     "name": "Berlin"
   },
+  "Global": {
+    "location": {
+      "lat": 31.9524799,
+      "lng": -102.1732882
+    },
+    "name": "Global, Midland, TX 79706, USA"
+  },
   "Greece": {
     "location": {
       "lat": 44.033802,
@@ -220,12 +262,40 @@
     },
     "name": "Hamburg"
   },
+  "Hedmark og Oppland": {
+    "location": {
+      "lat": 60.8744275,
+      "lng": 11.5658475
+    },
+    "name": "NRK Hedmark og Oppland, Elverum, Norway"
+  },
   "Holland": {
     "location": {
       "lat": 52.468333,
       "lng": 5.045833
     },
     "name": "Katwoude"
+  },
+  "Hordaland": {
+    "location": {
+      "lat": 60.2733674,
+      "lng": 5.7220194
+    },
+    "name": "Hordaland, Norway"
+  },
+  "Hungary": {
+    "location": {
+      "lat": 47.162494,
+      "lng": 19.503304
+    },
+    "name": "Hungary"
+  },
+  "Iceland": {
+    "location": {
+      "lat": 64.963051,
+      "lng": -19.020835
+    },
+    "name": "Iceland"
   },
   "Idomeni": {
     "location": {
@@ -240,6 +310,13 @@
       "lng": -80.45668594894016
     },
     "name": "Ireland"
+  },
+  "Izmir": {
+    "location": {
+      "lat": 38.423734,
+      "lng": 27.142826
+    },
+    "name": "Izmir, \u0130zmir, Turkey"
   },
   "Jersey": {
     "location": {
@@ -269,13 +346,69 @@
     },
     "name": "Leros, Los"
   },
+  "Lesbos": {
+    "location": {
+      "lat": 39.2645095,
+      "lng": 26.2777073
+    },
+    "name": "Lesbos, Lesbos, Greece"
+  },
+  "Lesvos": {
+    "location": {
+      "lat": 39.2645095,
+      "lng": 26.2777073
+    },
+    "name": "Lesbos, Lesbos, Greece"
+  },
   "Location": null,
+  "London": {
+    "location": {
+      "lat": 51.5073509,
+      "lng": -0.1277583
+    },
+    "name": "London, UK"
+  },
+  "London, NY": {
+    "location": {
+      "lat": 40.5782409,
+      "lng": -74.1367034
+    },
+    "name": "London Rd, Staten Island, NY 10306, USA"
+  },
   "Luxembourg": {
     "location": {
       "lat": 49.6116667,
       "lng": 6.13
     },
     "name": "Luxembourg"
+  },
+  "Malm\u00f6": {
+    "location": {
+      "lat": 55.604981,
+      "lng": 13.003822
+    },
+    "name": "Malm\u00f6, Sweden"
+  },
+  "Moria, Lesvos": {
+    "location": {
+      "lat": 39.131938,
+      "lng": 26.5170849
+    },
+    "name": "Moria 811 00, Greece"
+  },
+  "Moscov": {
+    "location": {
+      "lat": 55.755826,
+      "lng": 37.6173
+    },
+    "name": "Moscow, Russia"
+  },
+  "M\u00f8re og Romsdal": {
+    "location": {
+      "lat": 62.9760369,
+      "lng": 8.018272399999999
+    },
+    "name": "M\u00f8re og Romsdal, Norway"
   },
   "N/A": null,
   "New York": {
@@ -284,6 +417,27 @@
       "lng": -73.996705
     },
     "name": "New York City"
+  },
+  "Nord-Tr\u00f8ndelag": {
+    "location": {
+      "lat": 64.4370792,
+      "lng": 11.7462949
+    },
+    "name": "Nord-Trondelag, Norway"
+  },
+  "Nordland": {
+    "location": {
+      "lat": 67.693058,
+      "lng": 12.7073935
+    },
+    "name": "Nordland, Norway"
+  },
+  "Northern Ireland": {
+    "location": {
+      "lat": 54.7877149,
+      "lng": -6.4923145
+    },
+    "name": "Northern Ireland, UK"
   },
   "Norway": {
     "location": {
@@ -299,6 +453,27 @@
     },
     "name": "Oslo"
   },
+  "Presevo": {
+    "location": {
+      "lat": 42.3091712,
+      "lng": 21.6498686
+    },
+    "name": "Presevo, Serbia"
+  },
+  "Rogaland": {
+    "location": {
+      "lat": 59.1489544,
+      "lng": 6.0143431
+    },
+    "name": "Rogaland, Norway"
+  },
+  "Russia": {
+    "location": {
+      "lat": 61.52401,
+      "lng": 105.318756
+    },
+    "name": "Russia"
+  },
   "Skopje": {
     "location": {
       "lat": 41.996457,
@@ -313,19 +488,33 @@
     },
     "name": "Trzin"
   },
+  "Sogn og Fjordane": {
+    "location": {
+      "lat": 61.5539435,
+      "lng": 6.3325879
+    },
+    "name": "Sogn og Fjordane, Norway"
+  },
   "Spain": {
     "location": {
-      "lat": 48.744411,
-      "lng": 5.030222
+      "lat": 40.46366700000001,
+      "lng": -3.74922
     },
-    "name": "Robert-Espagne"
+    "name": "Spain"
   },
-  "St Polten ": {
+  "St Polten": {
     "location": {
-      "lat": 48.2,
-      "lng": 15.6333333
+      "lat": 48.20353,
+      "lng": 15.63817
     },
-    "name": "St. Polten"
+    "name": "St P\u00f6lten, Austria"
+  },
+  "Storskog": {
+    "location": {
+      "lat": 65.62378,
+      "lng": 15.96232
+    },
+    "name": "920 64 Storskog, Sweden"
   },
   "Stuttgart": {
     "location": {
@@ -334,12 +523,76 @@
     },
     "name": "Stuttgart"
   },
+  "Sweden": {
+    "location": {
+      "lat": 60.12816100000001,
+      "lng": 18.643501
+    },
+    "name": "Sweden"
+  },
+  "S\u00f8r-Tr\u00f8ndelag": {
+    "location": {
+      "lat": 63.0136823,
+      "lng": 10.3487135
+    },
+    "name": "Sor-Trondelag, Norway"
+  },
+  "Telemark": {
+    "location": {
+      "lat": 59.39139849999999,
+      "lng": 8.321121
+    },
+    "name": "Telemark, Norway"
+  },
+  "Thessaloniki-Idomeni": {
+    "location": {
+      "lat": 40.6400629,
+      "lng": 22.9444191
+    },
+    "name": "Thessaloniki, Greece"
+  },
+  "Throughout Europe": null,
+  "Troms": {
+    "location": {
+      "lat": 69.81782419999999,
+      "lng": 18.7819365
+    },
+    "name": "Troms, Norway"
+  },
+  "United Kingdom": {
+    "location": {
+      "lat": 55.378051,
+      "lng": -3.435973
+    },
+    "name": "United Kingdom"
+  },
+  "Vest-Agder": {
+    "location": {
+      "lat": 58.368605,
+      "lng": 6.901961600000001
+    },
+    "name": "Vest-Agder, Norway"
+  },
+  "Vestfold": {
+    "location": {
+      "lat": 59.17078619999999,
+      "lng": 10.1144355
+    },
+    "name": "Vestfold, Norway"
+  },
   "Werne": {
     "location": {
       "lat": 51.6658,
       "lng": 7.64563333333333
     },
     "name": "Werne"
+  },
+  "Zagreb": {
+    "location": {
+      "lat": 45.8150108,
+      "lng": 15.981919
+    },
+    "name": "Zagreb, Croatia"
   },
   "\u00d8stfold": {
     "location": {
