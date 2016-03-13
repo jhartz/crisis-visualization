@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Crisis Vis</title>
+    <meta charset="utf-8">
+    <title>Crisis Vis</title>
 
-	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
 
-	<script src="http://d3js.org/d3.v3.min.js"></script>
- 	<script src="http://d3js.org/topojson.v1.min.js"></script>
- 	<script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
 </head>
 <body>
+    <div class="container">
+    <header>
+        <h1>Syrian Crisis Visualization</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Social Media Coverage</a></li>
+            </ul>
+        </nav>
+    </header>
 
-	<header>
-  	<nav>
-  		<h1>Syrian Crisis Visualization</h1>
-  		<ul>
-  			<li><a href="index.html" style="background-color:#000;">Social Media Coverage</a></li>
-  		</ul>
-  	</nav>
-	</header>
+    <div class="map-container">
+        <div id="worldMap"></div>
+    </div>
+    </div>
 
-	<div id="worldMap" style="position: relative; width: 100%; max-height: 800px;"></div>
-
-  <script type="text/javascript" src="scripts/readjson.js"></script>
-  <script type="text/javascript" src="scripts/main.js"></script>
+    <script type="text/javascript" src="scripts/readjson.js"></script>
+    <script type="text/javascript" src="scripts/main.js"></script>
 </body>
 </html>
