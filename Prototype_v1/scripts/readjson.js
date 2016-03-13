@@ -38,7 +38,8 @@ function Location(jsonData) {
     this.members = jsonData.members || (this.isDefaultMembers = true, DEFAULT_MEMBERS);
     if (this.members < minMembers) minMembers = this.members;
     if (this.members > maxMembers) maxMembers = this.members;
-    
+
+    this.description = jsonData.description || "";
     this.media = jsonData.media || "";
     this.location = jsonData.location || null;
 
@@ -60,6 +61,9 @@ Location.prototype.getDescription = function () {
     desc += '<b>' + escapeHTML(this.name) + '</b><br>';
     if (this.enName && this.enName != this.name) {
         desc += escapeHTML(this.enName) + '<br>';
+    }
+    if (this.description) {
+        desc += '<i>' + escapeHTML(this.description) + '</i><br>';
     }
 
     var fields = [
