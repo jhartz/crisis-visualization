@@ -34,6 +34,7 @@ function Location(jsonData) {
     this.name = jsonData.name || "";
     this.enName = jsonData.en_name || "";
     this.date = new Date(jsonData.date);
+    this.coordinates = jsonData.coordinates || null;
 
     this.members = jsonData.members || (this.isDefaultMembers = true, DEFAULT_MEMBERS);
     if (this.members < minMembers) minMembers = this.members;
@@ -41,14 +42,12 @@ function Location(jsonData) {
 
     this.description = jsonData.description || "";
     this.media = jsonData.media || "";
-    this.location = jsonData.location || null;
+    this.location = jsonData.location || "";
+    this.country = jsonData.country || "";
 
     this.status = jsonData.status || "unknown";
     this.languages = jsonData.lang || [];
     this.url = jsonData.url || "";
-
-    this.country = jsonData.country || "";
-    this.coverage = jsonData.coverage || "";
 }
 
 /**
@@ -69,7 +68,7 @@ Location.prototype.getDescription = function () {
     var fields = [
         // ["Label", value if truthy]
         ["English Name", this.enName],
-        ["Location", [this.coverage, this.country].filter(function (i) { return !!i; }).join(", ")],
+        ["Location", [this.location, this.country].filter(function (i) { return !!i; }).join(", ")],
         ["Status", this.status],
         ["Date", this.date.getTime() && this.date.toDateString()],
         ["Languages", this.languages.join(", ")],
@@ -119,9 +118,9 @@ Location.prototype.getD3Object = function () {
         fillKey: this.media,
         date: this.date
     };
-    if (this.location) {
-        data.latitude = this.location.lat;
-        data.longitude = this.location.lng;
+    if (this.coordinates) {
+        data.latitude = this.coordinates.lat;
+        data.longitude = this.coordinates.lng;
     } else {
         console.log("WARNING: Using country:", this.country);
         data.country = this.country;
