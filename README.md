@@ -1,3 +1,7 @@
-# Crisis Visualization
+# Crisis Refugee Visualization
 
-Crisis Refugee Visualization
+Project Authors:
+
+- Jeannette Forbes
+- Jake Hartz
+- Drew Heintz
