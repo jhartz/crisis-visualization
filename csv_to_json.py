@@ -88,7 +88,6 @@ class SocialToJson:
                 'description': description,
                 'lang': lang_list,
                 'country': country,
-                'coverage': location,
                 'media': media,
                 'url': link,
                 'members': members,
