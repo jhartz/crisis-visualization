@@ -62,7 +62,7 @@ header li a:hover {
 .map-container {
     -webkit-flex: 1;
     flex: 1;
-    max-width: 1000px;
+    max-width: 1400px;
 }
 
 #worldMap {
