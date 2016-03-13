@@ -93,7 +93,8 @@ class SocialToJson:
                 'url': link,
                 'members': members,
                 'status': status,
-                'location': lat_lng,
+                'location': location,
+                'coordinates': lat_lng
             }
             yeah.append(data)
 
