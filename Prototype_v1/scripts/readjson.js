@@ -7,6 +7,23 @@ var minMembers = Infinity,
     maxMembers = -Infinity;
 
 /**
+ * Escapes text so it can be used as HTML.
+ *
+ * @param {string} text - The text to escape.
+ * @param {boolean} [convertNewlines=false] - Whether to convert newlines to
+ *        HTML br tags.
+ * @return {string} The text with HTML special characters removed.
+ */
+function escapeHTML(text, convertNewlines) {
+    var escaped = String(text).replace(/&/g, "&amp;")
+                              .replace(/</g, "&lt;")
+                              .replace(/>/g, "&gt;")
+                              .replace(/"/g, "&quot;");
+    if (convertNewlines) escaped = escaped.replace(/\n/g, "<br>");
+    return escaped;
+}
+
+/**
  * Represents a location on the map, generated from JSON data.
  *
  * @constructor
@@ -18,7 +35,7 @@ function Location(jsonData) {
     this.enName = jsonData.en_name || "";
     this.date = new Date(jsonData.date);
 
-    this.members = jsonData.members || DEFAULT_MEMBERS;
+    this.members = jsonData.members || (this.isDefaultMembers = true, DEFAULT_MEMBERS);
     if (this.members < minMembers) minMembers = this.members;
     if (this.members > maxMembers) maxMembers = this.members;
     
@@ -34,12 +51,41 @@ function Location(jsonData) {
 }
 
 /**
- * Generates a description for the location.
+ * Generates an HTML description for the location.
  *
  * @return {string} The generated description.
  */
 Location.prototype.getDescription = function () {
-    return this.name + ((this.enName && this.enName != this.name) ? ("\n" + this.enName) : "");
+    var desc = '';
+    desc += '<b>' + escapeHTML(this.name) + '</b><br>';
+    if (this.enName && this.enName != this.name) {
+        desc += escapeHTML(this.enName) + '<br>';
+    }
+
+    var fields = [
+        // ["Label", value if truthy]
+        ["English Name", this.enName],
+        ["Location", [this.coverage, this.country].filter(function (i) { return !!i; }).join(", ")],
+        ["Status", this.status],
+        ["Date", this.date.getTime() && this.date.toDateString()],
+        ["Languages", this.languages.join(", ")],
+        ["Media", this.media],
+        ["Members", !this.isDefaultMembers && this.members]
+    ];
+    desc += '<table><tbody>';
+    for (var i = 0; i < fields.length; i++) {
+        if (fields[i][1]) {
+            desc += '<tr><th>' + escapeHTML(fields[i][0]) + '</th>';
+            desc += '<td>' + escapeHTML(fields[i][1]) + '</td></tr>';
+        }
+    }
+    desc += '</tbody></table>';
+
+    if (this.url) {
+        desc += '<p><a href="' + escapeHTML(this.url) + '" target="_blank">Link</a></p>';
+    }
+
+    return desc;
 };
 
 /**
@@ -63,7 +109,8 @@ Location.prototype.getScaledRadius = function () {
  */
 Location.prototype.getD3Object = function () {
     var data = {
-        name: this.getDescription(),
+        name: this.name,
+        htmlDescription: this.getDescription(),
         radius: this.getScaledRadius(),
         fillKey: this.media,
         date: this.date

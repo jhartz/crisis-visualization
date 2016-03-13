@@ -32,11 +32,7 @@ function initMap() {
 function addBubbles(bubbles) {
     map.bubbles(bubbles, {
         popupTemplate: function (geo, data) {
-            return (
-                '<div class="hoverinfo">' +
-                data.name.replace(/\n/g, '<br>') +
-                '</div>'
-            );
+            return '<div class="hoverinfo">' + data.htmlDescription + '</div>';
         }
     });
 }

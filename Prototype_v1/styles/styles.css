@@ -76,3 +76,7 @@ header li a:hover {
     height: 100%;
     */
 }
+
+.hoverinfo th {
+    text-align: left;
+}
