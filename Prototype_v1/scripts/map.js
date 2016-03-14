@@ -11,10 +11,10 @@ var MAX_RADIUS = 50;
  * @property {string} nameProp - The name of the property on the data that
  *           contains the name of the individual property.
  *
- * @property {Array.<string>} filterByProps - A list of properties on the data
+ * @property {Array.<string>} filterProps - A list of properties on the data
  *           that the user should be allowed to filter by.
- * @property {Array.<string>} [filterByDefaults] - Default values for any of
- *           the properties in filterByProps that don't have a value.
+ * @property {Array.<string>} [filterDefaults] - Default values for any of
+ *           the properties in filterProps that don't have a value.
  *
  * @property {string} radiusProp - The property on the data that should be used
  *           to compute the radius.
@@ -97,7 +97,8 @@ function addBubbles(locations) {
 function Location(jsonData, config) {
     if (!dataByConfigName.hasOwnProperty(config.name)) {
         dataByConfigName[config.name] = {
-            filterByValues: [],
+            filterValuesByPropIndex: [],
+            filterEnabledByPropIndex: [],
             radiusPropMin: Infinity,
             radiusPropMax: -Infinity
         };
@@ -115,16 +116,24 @@ function Location(jsonData, config) {
     if (this.radius > this.configData.radiusPropMax)
         this.configData.radiusPropMax = this.radius;
 
-    this.filterBy = [];
-    var prop, defaultValue, values;
-    for (var i = 0; i < config.filterByProps.length; i++) {
-        prop = config.filterByProps[i];
-        defaultValue = config.filterByDefaults[i];
-        if (!this.configData.filterByValues[i]) this.configData.filterByValues[i] = [];
-        values = this.configData.filterByValues[i];
+    this.filterIndexByPropIndex = [];
+    var prop, defaultValue, values, valuesEnabled;
+    for (var i = 0; i < config.filterProps.length; i++) {
+        prop = config.filterProps[i];
+        defaultValue = config.filterDefaults[i];
+        if (!this.configData.filterValuesByPropIndex[i]) {
+            this.configData.filterValuesByPropIndex[i] = [];
+            this.configData.filterEnabledByPropIndex[i] = [];
+        }
+        values = this.configData.filterValuesByPropIndex[i];
+        valuesEnabled = this.configData.filterEnabledByPropIndex[i];
 
-        this.filterBy[i] = this.data[prop] || defaultValue;
-        if (values.indexOf(this.filterBy[i]) == -1) values.push(this.filterBy[i]);
+        var filterItem = this.data[prop] || defaultValue;
+        if (values.indexOf(filterItem) == -1) {
+            values.push(filterItem);
+            valuesEnabled.push(true);
+        }
+        this.filterIndexByPropIndex[i] = values.indexOf(filterItem);
     }
 
     this.coordinates = this.data[config.coordinatesProp] || config.coordinatesDefault;
@@ -180,6 +189,28 @@ function clearFiltering() {
 }
 
 /**
+ * Add bubbles after filtering.
+ *
+ * @param {Array.<Location>} locations - An array of Location objects
+ *        representing the locations on the map.
+ * @param {Configuration} config
+ */
+function filterAndAddBubbles(locations, config) {
+    var configData = dataByConfigName[config.name];
+    addBubbles(locations.filter(function (loc) {
+        var foundDisabled = false;
+        for (var i = 0; i < config.filterProps.length; i++) {
+            // See if we're disabled for this one
+            if (!configData.filterEnabledByPropIndex[i][loc.filterIndexByPropIndex[i]]) {
+                foundDisabled = true;
+                break;
+            }
+        }
+        return !foundDisabled;
+    }));
+}
+
+/**
  * Set up filtering checkboxes for locations on the map.
  *
  * @param {Array.<Location>} locations - An array of Location objects
@@ -191,18 +222,27 @@ function initFilteringCheckboxes(locations, config) {
     var configData = dataByConfigName[config.name];
 
     var ul = document.createElement("ul");
-    config.filterByProps.forEach(function (prop, index) {
-            configData.filterByValues[index].forEach(function (value) {
+    config.filterProps.forEach(function (prop, index) {
+        configData.filterValuesByPropIndex[index].forEach(function (value, valueIndex) {
+            function filter(enabled) {
+                configData.filterEnabledByPropIndex[index][valueIndex] = enabled;
+                filterAndAddBubbles(locations, config);
+            }
+
             var a = document.createElement("a");
+            a.setAttribute("href", "#");
             var cbox = document.createElement("input");
             cbox.setAttribute("type", "checkbox");
+            cbox.checked = configData.filterEnabledByPropIndex[index];
             a.appendChild(cbox);
             a.appendChild(document.createTextNode(" " + value));
             a.addEventListener("click", function (event) {
-                cbox.checked = !cbox.checked;
+                event.preventDefault();
+                filter(cbox.checked = !cbox.checked);
             }, false);
             cbox.addEventListener("click", function (event) {
-                alert("FILTERING BY: " + value);
+                event.stopPropagation();
+                filter(cbox.checked);
             }, false);
 
             var li = document.createElement("li");
@@ -245,19 +285,20 @@ function createLocations(jsonArray, config) {
         return new Location(item, config);
     });
 
-    // Now, add them to the map
-    addBubbles(locations);
-
     // Finally, set up filtering (based on how many things we're filtering by)
-    switch (config.filterByProps.length) {
+    // and add the bubbles to the map
+    switch (config.filterProps.length) {
         case 0:
             clearFiltering();
+            addBubbles(locations);
             break;
         case 1:
             initFilteringCheckboxes(locations, config);
+            filterAndAddBubbles(locations, config);
             break;
         default:
             initFilteringDropdowns(locations, config);
+            filterAndAddBubbles(locations, config);
     }
 
     return locations;
