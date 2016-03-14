@@ -25,6 +25,14 @@ var SOCIAL_MEDIA_CONFIG = {
     // the default value for the fill key
     fillKeyDefault: "",
 
+    fills: {
+        defaultFill: "#FFF",
+        facebook: "#00F",
+        twitter: "#0F0",
+        website: "#F00"
+    },
+
+
     // a function that is passed the data for a location and should return an HTML description
     makeDescription: function (data) {
         var desc = '';

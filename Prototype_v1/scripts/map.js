@@ -28,6 +28,9 @@ var MAX_RADIUS = 50;
  *           value used for the fill key.
  * @property (string} [fillKeyDefault] - Default value for fillKeyProp.
  *
+ * @property {Object.<string, string>} [fills] - Fill keys/values to pass as
+ *           the `fills` property for the DataMap constructor.
+ *
  * @property {Function} makeDescription - A function that is passed in the data
  *           and returns an HTML description of the location.
  */
@@ -37,24 +40,30 @@ var MAX_RADIUS = 50;
 var map;
 
 // Internal data stored by configuration name
-var dataByConfigName = {};
+var dataByConfigName = {
+/*
+    "config name": {
+        ... see props in initializer at top of Location constructor ...
+    },
+    ...
+*/
+};
 
 
 /**
  * Initialize the D3 DataMap.
+ *
+ * @param {Configuration} config
  */
-function initMap() {
+function initMap(config) {
     //MAP  - Specify bubbles, arcs & config in here
     map = new Datamap({
         scope: "world",
         element: document.getElementById("worldMap"),
         projection: "mercator",
         responsive: true,
-        fills: {
-            defaultFill: "#FFF",
-            facebook: "#00F",
-            twitter: "#0F0",
-            website: "#F00"
+        fills: config.fills || {
+            defaultFill: "#0000ff"
         },
         geographyConfig: {
             borderColor: "#000",
@@ -96,9 +105,20 @@ function addBubbles(locations) {
  */
 function Location(jsonData, config) {
     if (!dataByConfigName.hasOwnProperty(config.name)) {
+        // This is the first Location with this Configuration; initialize a
+        // data object for it.
         dataByConfigName[config.name] = {
-            filterValuesByPropIndex: [],
-            filterEnabledByPropIndex: [],
+            // Arrays of values, organized by property index
+            filterValuesByPropIndex: {
+                /* property index: [value, value, value, ...] */
+            },
+
+            // Arrays of booleans, where each indicates whether the value in
+            // the corresponding array from filterValuesByPropIndex is enabled
+            filterEnabledByPropIndex: {
+                /* property index: [true, true, false, true, ...] */
+            },
+
             radiusPropMin: Infinity,
             radiusPropMax: -Infinity
         };
@@ -109,6 +129,8 @@ function Location(jsonData, config) {
     this.data = jsonData;
 
     this.name = this.data[config.nameProp];
+    this.coordinates = this.data[config.coordinatesProp] || config.coordinatesDefault;
+    this.fillKey = this.data[config.fillKeyProp] || config.fillKeyDefault;
 
     this.radius = this.data[config.radiusProp] || config.radiusDefault;
     if (this.radius < this.configData.radiusPropMin)
@@ -116,29 +138,38 @@ function Location(jsonData, config) {
     if (this.radius > this.configData.radiusPropMax)
         this.configData.radiusPropMax = this.radius;
 
-    this.filterIndexByPropIndex = [];
+    // For each property in config.filterProps with index i, this object
+    // contains a property where the key is i and the value is the index in
+    // configData.filterValuesByPropIndex[i] that is our value for the property
+    this.filterIndexByPropIndex = {};
     var prop, defaultValue, values, valuesEnabled;
     for (var i = 0; i < config.filterProps.length; i++) {
+        // The property that we're filtering by
         prop = config.filterProps[i];
+        // The default value, in case we don't have a value for this property
         defaultValue = config.filterDefaults[i];
+        // Check if this property index is in configData.filterValuesByPropIndex
+        // (it won't be if this is the first Location we're creating with this
+        // Configuration)
         if (!this.configData.filterValuesByPropIndex[i]) {
             this.configData.filterValuesByPropIndex[i] = [];
             this.configData.filterEnabledByPropIndex[i] = [];
         }
+        // The array of possible values for this property
         values = this.configData.filterValuesByPropIndex[i];
+        // The array of whether each value is enabled
         valuesEnabled = this.configData.filterEnabledByPropIndex[i];
 
+        // Get our value for this property
         var filterItem = this.data[prop] || defaultValue;
+        // Add our value to the array of possible values if it ain't there
         if (values.indexOf(filterItem) == -1) {
             values.push(filterItem);
             valuesEnabled.push(true);
         }
+        // For this property, store which index our value is
         this.filterIndexByPropIndex[i] = values.indexOf(filterItem);
     }
-
-    this.coordinates = this.data[config.coordinatesProp] || config.coordinatesDefault;
-
-    this.fillKey = this.data[config.fillKeyProp] || config.fillKeyDefault;
 }
 
 /**
@@ -223,9 +254,27 @@ function initFilteringCheckboxes(locations, config) {
 
     var ul = document.createElement("ul");
     config.filterProps.forEach(function (prop, index) {
-        configData.filterValuesByPropIndex[index].forEach(function (value, valueIndex) {
+        // Create a label for this property
+        var li = document.createElement("li"),
+            label = document.createElement("label"),
+            cbox = document.createElement("input");
+        // Hidden checkbox for spacing
+        cbox.setAttribute("type", "checkbox");
+        cbox.style.visibility = "hidden";
+        label.appendChild(cbox);
+        label.appendChild(document.createTextNode(prop + ": "));
+        li.appendChild(label);
+        ul.appendChild(li);
+
+        // These arrays are the same length, corresponding to the number of
+        // values for thi property
+        var filterValues = configData.filterValuesByPropIndex[index];
+        var filterValuesEnabled = configData.filterEnabledByPropIndex[index];
+        // Create checkboxes for each value of this property
+        filterValues.forEach(function (value, valueIndex) {
+            // This function is called whenever the checkbox is changed
             function filter(enabled) {
-                configData.filterEnabledByPropIndex[index][valueIndex] = enabled;
+                filterValuesEnabled[valueIndex] = enabled;
                 filterAndAddBubbles(locations, config);
             }
 
@@ -233,7 +282,7 @@ function initFilteringCheckboxes(locations, config) {
             a.setAttribute("href", "#");
             var cbox = document.createElement("input");
             cbox.setAttribute("type", "checkbox");
-            cbox.checked = configData.filterEnabledByPropIndex[index];
+            cbox.checked = filterValuesEnabled[valueIndex];
             a.appendChild(cbox);
             a.appendChild(document.createTextNode(" " + value));
             a.addEventListener("click", function (event) {
