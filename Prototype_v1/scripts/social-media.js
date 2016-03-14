@@ -5,10 +5,10 @@ var SOCIAL_MEDIA_CONFIG = {
     // which property to use for the name
     nameProp: "name",
 
-    // which property to allow the user to filter by
-    filterByProp: "media",
-    // the default value for the filter by property
-    filterByDefault: "unknown",
+    // which properties to allow the user to filter by
+    filterByProps: ["media"],
+    // the default value for the filter by properties
+    filterByDefaults: ["unknown"],
 
     // which property to use for the radius
     radiusProp: "members",

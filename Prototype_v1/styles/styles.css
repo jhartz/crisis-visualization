@@ -59,6 +59,10 @@ header li a:hover {
     background-color: #111;
 }
 
+header li a label {
+    cursor: pointer;
+}
+
 /** WORLD MAP **/
 
 .map-container {
