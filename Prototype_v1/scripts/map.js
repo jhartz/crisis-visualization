@@ -15,6 +15,8 @@ var MAX_RADIUS = 50;
  *           that the user should be allowed to filter by.
  * @property {Array.<string>} [filterDefaults] - Default values for any of
  *           the properties in filterProps that don't have a value.
+ * @property {Array.<string>} [filterTitles] - Titles for any of the properties
+ *           in filterProps.
  *
  * @property {string} radiusProp - The property on the data that should be used
  *           to compute the radius.
@@ -262,7 +264,8 @@ function initFilteringCheckboxes(locations, config) {
         cbox.setAttribute("type", "checkbox");
         cbox.style.visibility = "hidden";
         label.appendChild(cbox);
-        label.appendChild(document.createTextNode(prop + ": "));
+        var title = (config.filterTitles && config.filterTitles[index]) || prop;
+        label.appendChild(document.createTextNode(title + ": "));
         li.appendChild(label);
         ul.appendChild(li);
 
