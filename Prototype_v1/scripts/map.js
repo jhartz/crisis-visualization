@@ -30,8 +30,11 @@ var MAX_RADIUS = 50;
  *           value used for the fill key.
  * @property (string} [fillKeyDefault] - Default value for fillKeyProp.
  *
- * @property {Object.<string, string>} [fills] - Fill keys/values to pass as
- *           the `fills` property for the DataMap constructor.
+ * @property {Object.<string, string>|Array.<string>} [fills] - Fill keys (and
+ *           values, if an object is used) to pass as the `fills` property for
+ *           the DataMap constructor. If an array is provided, (or if any
+ *           object entry is missing a value), values are generated using
+ *           d3.scale.categoryXX() scales.
  *
  * @property {Function} makeDescription - A function that is passed in the data
  *           and returns an HTML description of the location.
@@ -58,15 +61,25 @@ var dataByConfigName = {
  * @param {Configuration} config
  */
 function initMap(config) {
+    var fills = {
+        defaultFill: "#efefef"
+    };
+    if (config.fills) {
+        var keys = Array.isArray(config.fills) ?
+                    config.fills : Object.keys(config.fills),
+            cat = "category" + (keys.length <= 10 ? "10" : "20"),
+            scale = d3.scale[cat]();
+        keys.forEach(function (key) {
+            fills[key] = config.fills[key] || scale(key);
+        });
+    }
     //MAP  - Specify bubbles, arcs & config in here
     map = new Datamap({
         scope: "world",
         element: document.getElementById("worldMap"),
         projection: "mercator",
         responsive: true,
-        fills: config.fills || {
-            defaultFill: "#0000ff"
-        },
+        fills: fills,
         geographyConfig: {
             borderColor: "#000",
             highlightFillColor: "#333",
