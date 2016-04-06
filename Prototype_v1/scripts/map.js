@@ -91,6 +91,11 @@ function initMap(config) {
     window.addEventListener("resize", function (event) {
         map.resize();
     }, false);
+
+    // Set up zoom
+    var zoom = d3.behavior.zoom();
+    map.call.zoom();
+    map.on(".zoom", null);
 }
 
 /**
