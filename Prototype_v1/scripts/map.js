@@ -94,7 +94,7 @@ function initMap(config) {
 
     // Set up zoom
     var zoom = d3.behavior.zoom();
-    map.call.zoom();
+    map.call(zoom);
     map.on(".zoom", null);
 }
 
