@@ -94,8 +94,13 @@ function initMap(config) {
 
     // Set up zoom
     var zoom = d3.behavior.zoom();
-    map.call(zoom);
-    map.on(".zoom", null);
+    map.svg.call(zoom.on("zoom", function () {
+        var x = d3.event.translate[0];
+        var y = d3.event.translate[1];
+        map.svg.selectAll("g").style("transform",
+                "translate(" + x + "px, " + y + "px) " + 
+                "scale(" + (d3.event.scale) + ")");
+    }));
 }
 
 /**
