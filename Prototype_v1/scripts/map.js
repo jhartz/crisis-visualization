@@ -38,6 +38,9 @@ var MAX_RADIUS = 50;
  *
  * @property {Function} makeDescription - A function that is passed in the data
  *           and returns an HTML description of the location.
+ *
+ * @property {Function} makeUrl - A function that is passed in the data and
+ *           returns a URL to go to when the bubble is clicked (if applicable).
  */
 
 
@@ -94,6 +97,20 @@ function initMap(config) {
             mapZoom = new Zoom(map, container,
                     document.querySelectorAll(".zoom-button"),
                     document.querySelector("#zoom-info"));
+
+            // Set up onclick
+            if (typeof config.makeUrl == "function") {
+                // TODO: Is there a better way to do this?
+                map.svg[0][0].addEventListener("click", function (event) {
+                    if (event.target.tagName.toLowerCase() == "circle") {
+                        console.log("Item clicked: ", event.target);
+                        var data = event.target.__data__;
+                        if (data && data.url) {
+                            window.open(data.url, "_blank");
+                        }
+                    }
+                }, false);
+            }
         }
     });
 
@@ -234,9 +251,11 @@ Location.prototype.getScaledRadius = function () {
  * @return {Object} The object, ready to be passed to D3 Datamap.
  */
 Location.prototype.getD3Object = function () {
+    var makeUrl = this.config.makeUrl;
     var data = {
         name: this.name,
         htmlDescription: this.config.makeDescription(this.data),
+        url: typeof makeUrl == "function" ? makeUrl(this.data) : null,
         radius: this.getScaledRadius(),
         fillKey: this.fillKey
     };

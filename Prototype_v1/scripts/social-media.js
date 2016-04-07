@@ -76,5 +76,12 @@ var SOCIAL_MEDIA_CONFIG = {
         }
 
         return desc;
+    },
+
+
+    makeUrl: function (data) {
+        if (data.url) {
+            return data.url;
+        }
     }
 };
