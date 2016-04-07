@@ -72,14 +72,14 @@ var SOCIAL_MEDIA_CONFIG = {
         ]);
 
         if (data.url) {
-            desc += '<p><a href="' + escapeHTML(data.url) + '" target="_blank">Link</a></p>';
+            desc += '<p><a href="' + escapeHTML(data.url) + '" target="_blank">' + escapeHTML(data.url) + '</a></p>';
         }
 
         return desc;
     },
 
 
-    makeUrl: function (data) {
+    makeLink: function (data) {
         if (data.url) {
             return data.url;
         }
