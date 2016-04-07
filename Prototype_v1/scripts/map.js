@@ -73,10 +73,14 @@ function initMap(config) {
             fills[key] = config.fills[key] || scale(key);
         });
     }
+
     //MAP  - Specify bubbles, arcs & config in here
+    var container = document.getElementById("worldMap");
+    var mapZoom;
+
     map = new Datamap({
         scope: "world",
-        element: document.getElementById("worldMap"),
+        element: container,
         projection: "mercator",
         responsive: true,
         fills: fills,
@@ -84,6 +88,12 @@ function initMap(config) {
             borderColor: "#000",
             highlightFillColor: "#333",
             highlightBorderColor: "#666"
+        },
+        done: function (map) {
+            // Set up zoom
+            mapZoom = new Zoom(map, container,
+                    document.querySelectorAll(".zoom-button"),
+                    document.querySelector("#zoom-info"));
         }
     });
 
@@ -92,7 +102,9 @@ function initMap(config) {
         map.resize();
     }, false);
 
+
     // Set up zoom
+    /*
     var zoom = d3.behavior.zoom();
     map.svg.call(zoom.on("zoom", function () {
         var x = d3.event.translate[0];
@@ -101,6 +113,7 @@ function initMap(config) {
                 "translate(" + x + "px, " + y + "px) " + 
                 "scale(" + (d3.event.scale) + ")");
     }));
+    */
 }
 
 /**

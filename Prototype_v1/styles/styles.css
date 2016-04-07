@@ -25,11 +25,15 @@ header {
     color: #fff;
 }
 
-header h1 {
+header .title {
     float: left;
     display: block;
     padding: 5px;
+}
+
+header h1 {
     font-size: 1.2em;
+    margin: 0;
 }
 
 header nav {
@@ -44,6 +48,7 @@ header ul {
 
 header ul li {
     float: left;
+    padding: 0 3px;
 }
 
 header li a, header li label {
@@ -52,7 +57,7 @@ header li a, header li label {
     text-align: center;
     padding: 12px 8px;
     text-decoration: none;
-    background-color: #000;
+    /* background-color: #000; */
 }
 
 header li a {

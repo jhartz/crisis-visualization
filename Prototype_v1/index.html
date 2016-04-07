@@ -13,7 +13,17 @@
 <body>
 <div class="container">
     <header>
-        <h1>Syrian Crisis Visualization</h1>
+        <div class="title">
+            <h1>Syrian Crisis Visualization</h1>
+            <div id="control-container">
+                <ul>
+                    <li><button class="zoom-button" data-zoom="reset">0</button></li>
+                    <li><button class="zoom-button" data-zoom="out">-</button></li>
+                    <li><button class="zoom-button" data-zoom="in">+</button></li>
+                    <li><div id="zoom-info"></div></li>
+                </ul>
+            </div>
+        </div>
         <div id="filter-container"></div>
         <nav>
             <ul>
@@ -28,6 +38,7 @@
 </div>
 
 <script type="text/javascript" src="scripts/common.js"></script>
+<script type="text/javascript" src="scripts/map-zoom.js"></script>
 <script type="text/javascript" src="scripts/map.js"></script>
 <script type="text/javascript" src="scripts/social-media.js"></script>
 <script type="text/javascript" src="scripts/main.js"></script>
