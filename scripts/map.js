@@ -22,6 +22,10 @@ var MAX_RADIUS = 50;
  *           to compute the radius.
  * @property {number} [radiusDefault] - Default value for radiusProp.
  *
+ * @property {string} opacityProp - The property on the data that should be
+ *           used to compute the opacity.
+ * @property {number} [opacityDefault=1] - Default value for opacity.
+ *
  * @property {string} coordinatesProp - The property on the data that contains
  *           the coordinates.
  * @property {Object} [coordinatesDefault] - Default value for coordinatesProp.
@@ -192,6 +196,8 @@ function Location(jsonData, config) {
         this.configData.radiusPropMin = this.radius;
     if (this.radius > this.configData.radiusPropMax)
         this.configData.radiusPropMax = this.radius;
+
+    this.opacity = this.data[config.opacityProp] || config.opacityDefault || 1;
 
     // For each property in config.filterProps with index i, this object
     // contains a property where the key is i and the value is the index in

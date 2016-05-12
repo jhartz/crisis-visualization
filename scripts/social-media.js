@@ -1,3 +1,8 @@
+/**
+ * The configuration for the social media data.
+ * See the Configuration typedef in map.js.
+ * @type Configuration
+ */
 var SOCIAL_MEDIA_CONFIG = {
     // "name" identifies this config, and must be unique
     name: "Social Media",
@@ -16,6 +21,11 @@ var SOCIAL_MEDIA_CONFIG = {
     radiusProp: "members",
     // the default value if the property above is falsy
     radiusDefault: 500,
+
+    // which property to use for the opacity
+    opacityProp: "certainty",
+    // the default value if the property above is falsy
+    opacityDefault: 0.75,
 
     // the property with the coordinates
     coordinatesProp: "coordinates",
