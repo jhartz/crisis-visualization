@@ -51,6 +51,13 @@ var MAX_RADIUS = 50;
 // The D3 DataMap
 var map;
 
+// The current bubbles on the map
+var currentLocations = [];
+
+// The current scale level for the bubbles
+// (from 0 to 1)
+var currentScale = 0;
+
 // Internal data stored by configuration name
 var dataByConfigName = {
 /*
@@ -140,10 +147,15 @@ function initMap(config) {
 /**
  * Add bubbles to the D3 DataMap.
  *
- * @param {Array.<Location>} locations - An array of the locations to add to
- *        the map as bubbles;
+ * @param {Array.<Location>} [locations] - An array of the locations to add to
+ *        the map as bubbles. If not provided, re-adds the last set of bubbles.
  */
 function addBubbles(locations) {
+    if (locations) {
+        currentLocations = locations;
+    } else {
+        locations = currentLocations;
+    }
     map.bubbles(locations.map(function (item) {
         return item.getD3Object();
     }), {
@@ -262,7 +274,7 @@ Location.prototype.getD3Object = function () {
         name: this.name,
         htmlDescription: this.config.makeDescription(this.data),
         link: typeof makeLink == "function" ? makeLink(this.data) : null,
-        radius: this.getScaledRadius(),
+        radius: this.getScaledRadius() * (1 - (scale * 0.9)),
         fillKey: this.fillKey
     };
     if (this.coordinates) {
