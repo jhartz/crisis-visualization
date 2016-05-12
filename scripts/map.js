@@ -274,7 +274,7 @@ Location.prototype.getD3Object = function () {
         name: this.name,
         htmlDescription: this.config.makeDescription(this.data),
         link: typeof makeLink == "function" ? makeLink(this.data) : null,
-        radius: this.getScaledRadius() * (1 - (scale * 0.9)),
+        radius: this.getScaledRadius() * (1 - (currentScale * 0.9)),
         fillKey: this.fillKey
     };
     if (this.coordinates) {
