@@ -275,7 +275,8 @@ Location.prototype.getD3Object = function () {
         htmlDescription: this.config.makeDescription(this.data),
         link: typeof makeLink == "function" ? makeLink(this.data) : null,
         radius: this.getScaledRadius() * (1 - (currentScale * 0.9)),
-        fillKey: this.fillKey
+        fillKey: this.fillKey,
+        fillOpacity: this.opacity
     };
     if (this.coordinates) {
         data.latitude = this.coordinates.lat;
