@@ -78,7 +78,8 @@ var SOCIAL_MEDIA_CONFIG = {
             ["Date", date.getTime() && date.toDateString()],
             ["Languages", data.lang.filter(exists).join(", ")],
             ["Media", data.media],
-            ["Members", data.members]
+            ["Members", data.members],
+            ["Data Certainty", data.certainty && (Math.round(data.certainty * 100) + "%")]
         ]);
 
         if (data.url) {
