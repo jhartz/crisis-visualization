@@ -120,6 +120,10 @@ Zoom.prototype._update = function(translate, scale) {
     this.datamap.svg.selectAll("g")
         .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
 
+    // SET CURRENT SCALE FOR VAR IN map.js
+    var value = (Math.log(scale)) / (Math.log(this.scale.max));
+    updateScale(value);
+
     this._displayPercentage(scale);
 };
 

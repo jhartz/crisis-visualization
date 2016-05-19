@@ -165,6 +165,17 @@ function addBubbles(locations) {
     });
 }
 
+/**
+ * Update the scale and re-add the bubbles.
+ *
+ * @param {number} [newScale] - The new scale value.
+ */
+function updateScale(newScale) {
+    console.log("Setting scale to", newScale);
+    currentScale = newScale;
+    addBubbles();
+}
+
 
 /**
  * Represents a location on the map, generated from JSON data.
@@ -270,13 +281,16 @@ Location.prototype.getScaledRadius = function () {
  */
 Location.prototype.getD3Object = function () {
     var makeLink = this.config.makeLink;
+    var scale = Math.max(0.2, 1 - Math.pow(currentScale, 0.5));
     var data = {
         name: this.name,
         htmlDescription: this.config.makeDescription(this.data),
         link: typeof makeLink == "function" ? makeLink(this.data) : null,
-        radius: this.getScaledRadius() * (1 - (currentScale * 0.9)),
+        radius: this.getScaledRadius() * scale,
+        borderWidth: scale,
         fillKey: this.fillKey,
-        fillOpacity: this.opacity
+        fillOpacity: this.opacity,
+        borderOpacity: this.opacity
     };
     if (this.coordinates) {
         data.latitude = this.coordinates.lat;
