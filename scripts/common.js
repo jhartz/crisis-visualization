@@ -42,3 +42,37 @@ function makeHTMLTable(fields) {
 function exists(i) {
     return !!i;
 }
+
+/**
+ * Read in JSON data from a URL.
+ *
+ * @param {string} jsonURL - The URL to read the JSON data from.
+ * @param {Function} callback - A function to call when the data has been read.
+ */
+function readJSON(jsonURL, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", jsonURL, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                // All good!
+                // Try to parse the JSON
+                var data;
+                try {
+                    data = JSON.parse(xhr.responseText);
+                } catch (err) {
+                    console.log(err);
+                    alert("Error parsing JSON:\n" + err);
+                }
+                if (data) {
+                    callback(data);
+                }
+            } else {
+                alert("JSON request failed (status " + xhr.status + ")");
+            }
+        }
+    };
+    xhr.send(null);
+}
+
+

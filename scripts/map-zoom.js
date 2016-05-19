@@ -122,7 +122,7 @@ Zoom.prototype._update = function(translate, scale) {
 
     // SET CURRENT SCALE FOR VAR IN map.js
     var value = (Math.log(scale)) / (Math.log(this.scale.max));
-    updateScale(value);
+    map.updateScale(value);
 
     this._displayPercentage(scale);
 };
