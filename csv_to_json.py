@@ -18,6 +18,9 @@ GOOGLE_API_KEY = SECRETS[1]
 GEO_URL = 'http://api.geonames.org/postalCodeLookupJSON'
 GEO_CACHE_FILE = 'geo_cache.json'
 
+ROW_NAMES = ['id', 'date', 'name', 'english_name', 'description', 'languages',
+    'country', 'location', 'media', 'link', 'members', 'status']
+
 class SocialToJson:
     def __init__(self):
         self.geolocator = geopy.geocoders.GoogleV3(api_key=GOOGLE_API_KEY)
@@ -33,7 +36,16 @@ class SocialToJson:
         yeah = [] # Output list is now named yeah
         csv_lines = open(filename, 'r', encoding='utf-8').read().splitlines()
         socialreader = csv.reader(csv_lines, delimiter=',', quotechar='"')
+        
+        lowest_certainty = 1    # What was the lowest certainty value
+        missing_count = []      # How many fields are missing
+        total_records = 0       # Total number of rows handled    
+        for i in range(12):
+            missing_count.append(0)
+    
         for row in socialreader:
+            # row[0] is an ID which appears arbitrary
+            # Date when data was recorded
             date = row[1]
             # Name in it's native language
             orig_name = row[2]
@@ -80,6 +92,17 @@ class SocialToJson:
             if lat_lng is None:
                 lat_lng = self.get_latlng(country)
             # If that fails then oh well
+            
+            # Determine the certainty
+            certainty = 1
+            field_count = len(row) - 1
+            for i in range(1, len(row)):
+                if row[i] is None or row[i] == "":
+                    missing_count[i] += 1
+                    certainty -= 1/field_count
+            if certainty < lowest_certainty:
+                lowest_certainty = certainty
+            total_records += 1
 
             data = {
                 'date': str(date),
@@ -93,10 +116,14 @@ class SocialToJson:
                 'members': members,
                 'status': status,
                 'location': location,
-                'coordinates': lat_lng
+                'coordinates': lat_lng,
+                'certainty': certainty,
             }
             yeah.append(data)
-
+        print("lowest certainty:", lowest_certainty)
+        print('Missing Values (out of ' + str(total_records) + ')')
+        for i in range(len(ROW_NAMES)):
+            print('  ' + ROW_NAMES[i] + ':\t' + str(missing_count[i]))
         # Store current geo_cache back to file
         with open(GEO_CACHE_FILE,'w') as fido:
             fido.write(json.dumps(self.geo_cache, indent=2, sort_keys=True))
